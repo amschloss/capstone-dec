@@ -16,17 +16,22 @@ The City of Chicago provides several datasets that allow us to explore these que
 * **[Transportation Network Providers - Trips](https://data.cityofchicago.org/Transportation/Transportation-Network-Providers-Trips/m6dm-c72p)**; 159M rows. This set includes every trip taken on a Transportation Network Provider (rideshare operator), either starting or ending within Chicago city limits since November 2018. Trips are geolocated by census block of trip start/end.
 * **[E-Scooter Trips - 2019 Pilot](https://data.cityofchicago.org/Transportation/E-Scooter-Trips-2019-Pilot/2kfw-zvte)**; 711K rows. This set includes every trip taken on an e-scooter (maintained by a scooter share provider), either starting or ending within Chicago city limits, during Chicago’s 2019 scooter pilot program. Trips are geolocated by census block of trip start/end.
 
-As these datasets are not consistently geolocated, we will also need to transform the congestion data with the **[Boundaries - Census Tracts - 2010](https://data.cityofchicago.org/Facilities-Geographic-Boundaries/Boundaries-Census-Tracts-2010/5jrd-6zik)** dataset also provided by the City.
+A specific source for weather data is yet to be determined. The City's site offers daily records, which are not sufficiently granular compared to the other data. Weather APIs are still being evaluated, as historical data is proving difficult to find.
 
-A specific source for weather data is yet to be determined. The City's site offers daily records, which are not sufficiently granular compared to the other data
+## Technical Considerations
 
-## Problem Considerations
+### Extract
 
-* _Is the dataset large enough to necessitate distributed computing?_ \
-This is to be determined -- individual datasets appear to be 1-2 gigabytes in size, although joins and other transformations may increase the data size.
-* _Is the dataset static and complete, or does it undergo incremental updates?_
-    * The congestion estimates dataset updates approximately every 15 minutes. Data extraction processes could be made more efficient by making an initial pull to this historical set, then making future calls to the **[live set](https://data.cityofchicago.org/Transportation/Chicago-Traffic-Tracker-Congestion-Estimates-by-Se/n4j6-wkkf)** which updates on the same schedule.
-    * The rideshare data does not appear to have been updated since the end of July; this may reflect delays in the rideshare providers sharing data with the City. This dataset may update in the future.
-    * The e-scooter data explicitly only covers the period of the 2019 pilot program, and is therefore static. The City is currently running a second pilot, so newer data may become available in the future.
-* _Can you combine your primary dataset with another dataset in order to derive more value?_ \
-Potentially. Possible expansions include weather data, where effects could potentially be most significant for scooter use.
+Initial extract will pull historical congestion data along with 2019 e-scooter pilot data. Ongoing extracts will pull the following:
+
+* **[Live congestion estimates](https://data.cityofchicago.org/Transportation/Chicago-Traffic-Tracker-Congestion-Estimates-by-Se/n4j6-wkkf)**, which update every 15 minutes
+* TNP trips, which update either monthly or quarterly; these will need to have a diff applied as there is no "live set" offered
+* Weather data, which updates in real time but in practice will be pulled every 15 minutes to match live congestion estimates
+
+### Transform
+
+The datasets in question are not consistently geolocated. TNP and e-scooter trips are located by census block, while congestion estimates and weather measurements are located by latitude/longitude. Therefore we will need to generalize the congestion and weather data from lat/long to census block according to the **[Boundaries - Census Tracts - 2010](https://data.cityofchicago.org/Facilities-Geographic-Boundaries/Boundaries-Census-Tracts-2010/5jrd-6zik)** dataset also provided by the City.
+
+### Load
+
+TBD
