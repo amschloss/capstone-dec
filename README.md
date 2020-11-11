@@ -4,16 +4,23 @@
 
 Ridesharing (Uber, Lyft, and the like) has significantly altered urban travel habits during the 2010s, but the effects are not always well-understood. 
 
-* How has the use of ridesharing in the City of Chicago affected traffic congestion since the end of 2018?
+* How has the use of ridesharing (Transportation Network Providers / TNP) in the City of Chicago affected traffic congestion since the end of 2018?
 * The addition of dockless scooter sharing provides another layer to the transportation network. What effect (if any) did Chicago’s 2019 scooter pilot (and, if data is available, 2020 pilot) have on traffic congestion? Was there an effect on automotive rideshare (i.e. mode shifting)?
 * How is the usage of ridesharing and scooter sharing -- and the effects of that usage on traffic congestion -- affected by weather?
+
+## KPIs
+
+* Time-sliced congestion by census block over time (i.e. how traffic-congested was census block X from 8-8:30 AM during 2019?)
+* Time-sliced TNP usage by census block over time
+* Time-sliced E-scooter usage by census block over time
+* Weather-sliced congestion by census block over time (i.e. how traffic-congested was census block X during 2019 when it was sunny?)
 
 ## Proposed Dataset(s)
 
 The City of Chicago provides several datasets that allow us to explore these questions:
 
-* **[Historical Congestion Estimates by Segment - 2018-Current](https://data.cityofchicago.org/Transportation/Chicago-Traffic-Tracker-Historical-Congestion-Esti/sxs8-h27x)**; 131M rows. This set includes a selection of Chicago arterial street segments, totaling around 300 miles of roadway, along with estimates of how congested each segment is within a given time slice. Segments are geolocated by latitude/longitude of segment ends.
-* **[Transportation Network Providers - Trips](https://data.cityofchicago.org/Transportation/Transportation-Network-Providers-Trips/m6dm-c72p)**; 159M rows. This set includes every trip taken on a Transportation Network Provider (rideshare operator), either starting or ending within Chicago city limits since November 2018. Trips are geolocated by census block of trip start/end.
+* **[Historical Congestion Estimates by Segment - 2018-Current](https://data.cityofchicago.org/Transportation/Chicago-Traffic-Tracker-Historical-Congestion-Esti/sxs8-h27x)**; 137M rows. This set includes a selection of Chicago arterial street segments, totaling around 300 miles of roadway, along with estimates of how congested each segment is within a given time slice. Segments are geolocated by latitude/longitude of segment ends.
+* **[Transportation Network Providers - Trips](https://data.cityofchicago.org/Transportation/Transportation-Network-Providers-Trips/m6dm-c72p)**; 169M rows. This set includes every trip taken on a Transportation Network Provider (rideshare operator), either starting or ending within Chicago city limits since November 2018. Trips are geolocated by census block of trip start/end.
 * **[E-Scooter Trips - 2019 Pilot](https://data.cityofchicago.org/Transportation/E-Scooter-Trips-2019-Pilot/2kfw-zvte)**; 711K rows. This set includes every trip taken on an e-scooter (maintained by a scooter share provider), either starting or ending within Chicago city limits, during Chicago’s 2019 scooter pilot program. Trips are geolocated by census block of trip start/end.
 
 A specific source for weather data is yet to be determined. The City's site offers daily records, which are not sufficiently granular compared to the other data. Weather APIs are still being evaluated, as historical data is proving difficult to find.
