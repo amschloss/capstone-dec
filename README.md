@@ -10,10 +10,21 @@ Ridesharing (Uber, Lyft, and the like) has significantly altered urban travel ha
 
 ## KPIs
 
-* Time-sliced congestion by census block over time (i.e. how traffic-congested was census block X from 8-8:30 AM during 2019?)
+* Time-sliced congestion by census block over time (i.e. how traffic-congested was census block X from 8-8:30 AM each day of 2019?)
 * Time-sliced TNP usage by census block over time
 * Time-sliced E-scooter usage by census block over time
-* Weather-sliced congestion by census block over time (i.e. how traffic-congested was census block X during 2019 when it was sunny?)
+* Weather-sliced congestion by census block over time (i.e. how traffic-congested was census block X when it was sunny during 2019?)
+* Weather-sliced TNP usage usage by census block over time
+* Weather-sliced E-scooter usage by census block over time
+* Aggregate congestion by census block by time slice
+* Aggregate TNP usage by census block by time slice
+* Aggregate E-scooter usage by census block by time slice
+* Congestion vs. TNP usage by census block
+* Congestion vs. TNP usage by weather condition
+* Congestion vs. E-scooter usage by census block
+* Congestion vs. E-scooter usage by weather condition
+
+E-scooter KPIs broken down by weather may or may not be possible, depending on the availability of historical weather data.
 
 ## Proposed Dataset(s)
 
